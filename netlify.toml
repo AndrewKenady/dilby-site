@@ -1,0 +1,4 @@
+# Netlify serves site/ as-is (no build step) and collects the early-access form with Netlify Forms.
+[build]
+  publish = "site"
+  command = ""

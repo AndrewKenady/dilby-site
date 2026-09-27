@@ -15,13 +15,14 @@
   --text-2: #57514a;
   --text-3: #837b71;
   --line: #e4dfd6;
-  --accent: #c8620f;
+  --accent: #a8500c;
   --accent-soft: #fbe9d6;
   --accent-ink: #fff8ee;
   --ember-a: #ec7a2c;
   --ember-b: #ffc466;
   --glow: rgba(240, 120, 44, .10);
   --ok: #3f7d4e;
+  --danger: #b3261e;
   --font-sans: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --font-display: "Iowan Old Style", "Sitka Display", "Sitka Heading", Charter, "Bitstream Charter", Georgia, serif;
   --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
@@ -43,6 +44,7 @@
     --accent-ink: #1a110a;
     --glow: rgba(255, 174, 72, .12);
     --ok: #8fcf9c;
+    --danger: #ff8a80;
   }
 }
 :root[data-theme="dark"] {
@@ -59,9 +61,11 @@
   --accent-ink: #1a110a;
   --glow: rgba(255, 174, 72, .12);
   --ok: #8fcf9c;
+  --danger: #ff8a80;
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body { background: var(--bg); color: var(--text); font: 16px/1.6 var(--font-sans); padding-inline: 20px; }
 .wrap { max-width: 1080px; margin-inline: auto; }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.12; text-wrap: balance; margin: 0; letter-spacing: -.01em; }
@@ -73,7 +77,7 @@ a { color: var(--accent); }
 .eyebrow { font: 600 .74rem/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 .lede { color: var(--text-2); font-size: 1.15rem; max-width: var(--measure); }
 .muted { color: var(--text-2); }
-section { padding-block: clamp(56px, 8vw, 96px); border-top: 1px solid var(--line); }
+section { padding-block: clamp(44px, 6vw, 72px); border-top: 1px solid var(--line); }
 .section-head { display: grid; gap: 14px; margin-bottom: 40px; max-width: 720px; }
 .badge { display: inline-flex; align-items: center; gap: 6px; font: 600 .7rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; padding: 5px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--text-3); white-space: nowrap; }
 .badge.soon { border-color: var(--accent); color: var(--accent); }
@@ -83,11 +87,12 @@ section { padding-block: clamp(56px, 8vw, 96px); border-top: 1px solid var(--lin
 .brand { display: flex; align-items: center; gap: 10px; font: 600 1.3rem/1 var(--font-display); color: var(--text); text-decoration: none; }
 .brand svg { width: 34px; height: 34px; }
 .top nav { display: flex; gap: 22px; align-items: center; font-size: .92rem; }
-.top nav a { color: var(--text-2); text-decoration: none; }
-.top nav a:hover { color: var(--text); }
+.top nav a:not(.btn) { color: var(--text-2); text-decoration: none; }
+.top nav a:not(.btn):hover { color: var(--text); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 600 1rem/1 var(--font-sans); padding: 14px 20px; border-radius: 10px; border: 1px solid transparent; text-decoration: none; cursor: pointer; }
 .btn-primary { background: var(--accent); color: var(--accent-ink); }
 .btn-primary:hover { filter: brightness(1.06); }
+.btn[disabled] { opacity: .7; cursor: progress; }
 .btn-ghost { border-color: var(--line); color: var(--text); background: transparent; }
 .btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .top .btn { padding: 10px 14px; font-size: .9rem; }
@@ -103,13 +108,13 @@ section { padding-block: clamp(56px, 8vw, 96px); border-top: 1px solid var(--lin
 @media (max-width: 880px) { .hero { grid-template-columns: 1fr; padding-block: 24px 56px; } }
 
 /* The room: devices around one hearth */
-.room { position: relative; background: radial-gradient(60% 60% at 50% 50%, var(--glow), transparent 70%), var(--bg-2); border: 1px solid var(--line); border-radius: 20px; padding: 22px; display: grid; gap: 16px; }
+.room { margin: 0; position: relative; background: radial-gradient(60% 60% at 50% 50%, var(--glow), transparent 70%), var(--bg-2); border: 1px solid var(--line); border-radius: 20px; padding: 22px; display: grid; gap: 16px; }
 .room svg.map { width: 100%; height: auto; display: block; }
-.map text { font: 600 11px var(--font-mono); fill: var(--text-2); }
-.map .wire { stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 3 5; fill: none; }
+.map text { font: 600 12px var(--font-mono); fill: var(--text-2); }
+.map .wire { stroke: var(--text-3); stroke-opacity: .5; stroke-width: 1.5; stroke-dasharray: 3 5; fill: none; }
 .map .pulse { stroke: var(--accent); stroke-width: 2; fill: none; stroke-dasharray: 6 200; animation: flow 3.2s linear infinite; }
-.map .dev { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
-.map .dev-ink { stroke: var(--text-2); stroke-width: 1.5; fill: none; }
+.map .dev { fill: var(--surface); stroke: var(--text-3); stroke-width: 1.5; }
+.map .dev-ink { stroke: var(--text-2); stroke-width: 2; fill: none; stroke-linecap: round; }
 @keyframes flow { from { stroke-dashoffset: 206; } to { stroke-dashoffset: 0; } }
 .chat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 10px; font-size: .92rem; }
 .chat .who { font: 600 .72rem/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
@@ -170,6 +175,7 @@ form { background: var(--surface); border: 1px solid var(--line); border-radius:
 input, select, textarea { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; width: 100%; }
 textarea { resize: vertical; min-height: 84px; }
 fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+fieldset legend { padding: 0; margin-bottom: 8px; }
 .choices { display: flex; flex-wrap: wrap; gap: 8px; }
 .choice { position: relative; }
 .choice input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
@@ -177,7 +183,7 @@ fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
 .choice input:checked + span { border-color: var(--accent); background: var(--accent-soft); color: var(--text); font-weight: 600; }
 .choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.err { color: #c0392b; font-size: .85rem; }
+.err { color: var(--danger); font-size: .9rem; margin: 0; }
 .done { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--accent); border-radius: 18px; padding: 26px; }
 @media (max-width: 860px) { .signup { grid-template-columns: 1fr; } .row2 { grid-template-columns: 1fr; } }
 
@@ -367,10 +373,12 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
           <p class="eyebrow">Early access</p>
           <h2 id="access-t">Get Eli early.</h2>
           <p class="lede">We're letting people in a few at a time. Tell us a little about where Eli would live, and we'll be in touch.</p>
-          <p class="fine">Preview: this form isn't connected yet, so nothing is sent.</p>
+          <p class="fine">We'll only use your email to contact you about Eli early access.</p>
         </div>
         <div>
-          <form id="form" novalidate>
+          <form id="form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="early-access">
+            <p hidden><label for="f-bot">Leave this empty</label><input id="f-bot" name="bot-field" tabindex="-1" autocomplete="off"></p>
             <div class="row2">
               <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
               <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
@@ -397,12 +405,12 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
               </div>
             </fieldset>
             <p class="err" id="err" role="alert" hidden></p>
-            <button class="btn btn-primary" type="submit">Request early access</button>
+            <button class="btn btn-primary" id="f-submit" type="submit">Request early access</button>
           </form>
           <div class="done" id="done" hidden tabindex="-1">
             <p class="eyebrow">Request received</p>
             <h3 id="done-t">Thanks, you're on the list.</h3>
-            <p class="muted">We'll email you when there's a spot. (Preview: nothing was actually sent.)</p>
+            <p class="muted">We'll email you when there's a spot.</p>
           </div>
         </div>
       </div>
@@ -434,25 +442,40 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
   const sync = () => { org.hidden = !document.getElementById('f-org').checked; };
   form.addEventListener('change', sync);
   sync();
-  form.addEventListener('submit', (e) => {
+  const val = (id) => document.getElementById(id).value.trim();
+  const button = document.getElementById('f-submit');
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
+    const name = val('f-name');
     const problems = [];
     if (!name) problems.push('your name');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) problems.push('an email address we can reach');
-    if (!org.hidden && !form.org.value.trim()) problems.push('your organization name');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('f-email'))) problems.push('an email address we can reach');
+    if (!org.hidden && !val('f-orgname')) problems.push('your organization name');
     if (problems.length) {
       err.textContent = `Please add ${problems.join(', ')}.`;
       err.hidden = false;
       return;
     }
     err.hidden = true;
-    form.hidden = true;
-    const done = document.getElementById('done');
-    document.getElementById('done-t').textContent = `Thanks, ${name.split(' ')[0]}. You're on the list.`;
-    done.hidden = false;
-    done.focus();
+    // Netlify Forms takes the submission at the site root, URL-encoded.
+    const data = new FormData(form);
+    if (org.hidden) { data.delete('org'); data.delete('size'); }
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    try {
+      const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data).toString() });
+      if (!res.ok) throw new Error(String(res.status));
+      form.hidden = true;
+      const done = document.getElementById('done');
+      document.getElementById('done-t').textContent = `Thanks, ${name.split(' ')[0]}. You're on the list.`;
+      done.hidden = false;
+      done.focus();
+    } catch {
+      err.textContent = 'Your request didn’t go through. Check your connection and try again.';
+      err.hidden = false;
+      button.disabled = false;
+      button.textContent = 'Request early access';
+    }
   });
 })();
 </script>
