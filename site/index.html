@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Dilby: one private AI for your whole home or team.">
+<meta name="description" content="Dilby is an AI for everyone under your roof: it runs on your own computer, learns what your household shares, and keeps your conversations at home.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Dilby Early Access</title>
 <style>
@@ -166,6 +166,42 @@ section { padding-block: clamp(44px, 6vw, 72px); border-top: 1px solid var(--lin
 .term .c { color: #978a7b; }
 @media (max-width: 860px) { .tinker { grid-template-columns: 1fr; } }
 
+
+/* Proof points */
+.proof { list-style: none; padding: 0; margin: 4px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--text-2); font-size: .92rem; }
+.proof li { display: inline-flex; align-items: center; gap: 8px; }
+.proof svg { width: 18px; height: 18px; color: var(--accent); flex: none; }
+
+/* Why Dilby */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.compare .col { border-radius: 18px; padding: 26px; display: grid; gap: 14px; align-content: start; }
+.compare .them { border: 1px dashed var(--line); }
+.compare .us { background: var(--surface); border: 1px solid var(--accent); box-shadow: 0 0 0 4px var(--glow); }
+.compare ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.compare li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; color: var(--text-2); }
+.compare .them li::before { content: "\2013"; color: var(--text-3); }
+.compare .us li::before { content: "\2713"; color: var(--accent); font-weight: 700; }
+.compare .us li { color: var(--text); }
+@media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+
+/* A day with Dilby */
+.scenes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.scene { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+.scene .when { font: .78rem/1.3 var(--font-mono); color: var(--text-3); }
+.scene time { color: var(--accent); font-weight: 600; margin-right: 6px; font-variant-numeric: tabular-nums; }
+.scene .ask { justify-self: end; background: var(--accent-soft); padding: 8px 12px; border-radius: 12px 12px 4px 12px; font-size: .94rem; }
+.scene .reply { font-size: .94rem; color: var(--text); }
+.scene code { font-family: var(--font-mono); font-size: .86em; }
+.scene.code .ask { justify-self: stretch; font-family: var(--font-mono); font-size: .84rem; }
+.tag { justify-self: start; font: 600 .7rem/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--text-3); }
+.tag.hl { border-color: var(--accent); color: var(--accent); }
+.tag.lock { border-color: var(--text-3); color: var(--text-2); }
+@media (max-width: 960px) { .scenes { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .scenes { grid-template-columns: 1fr; } }
+
+/* Organizations */
+.road li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+
 /* Audiences and tiers */
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: grid; gap: 14px; align-content: start; }
@@ -226,10 +262,10 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
       Dilby
     </a>
     <nav aria-label="Page sections">
-      <a href="#how">How it works</a>
+      <a href="#day">A day with Dilby</a>
       <a href="#shared">Shared memory</a>
       <a href="#tinkerers">For tinkerers</a>
-      <a href="#plans">Plans</a>
+      <a href="#orgs">Organizations</a>
       <a href="#faq">FAQ</a>
       <a class="btn btn-primary" href="#access">Request early access</a>
     </nav>
@@ -239,13 +275,17 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
     <div class="hero">
       <div class="hero-copy">
         <p class="prompt"><b>dilby&gt;</b> distributed intelligence living beside you</p>
-        <h1>One private AI for your whole home or team.</h1>
-        <p class="lede">Dilby runs on a computer you own and answers everyone on your network. It remembers together, keeps personal things personal, and works with the internet unplugged.</p>
+        <h1>An AI for everyone under your roof.</h1>
+        <p class="lede">Dilby runs on a computer in your home and helps the whole household, from homework to dinner plans. It learns what your family shares, keeps what's personal private, and your conversations stay on your own machine.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#access">Request early access</a>
-          <a class="btn btn-ghost" href="#how">See how it works</a>
+          <a class="btn btn-ghost" href="#day">See a day with Dilby</a>
         </div>
-        <p class="fine">Free for homes and communities.</p>
+        <ul class="proof" aria-label="At a glance">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 11l9-7 9 7M5 9.5V20h14V9.5"/></svg>Runs on your own PC</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 3l18 18M8.5 16.4a5 5 0 0 1 7-.02M5 12.9a10 10 0 0 1 4.2-2.6M19 12.9a10 10 0 0 0-2.2-1.6M2 9a15 15 0 0 1 4.6-2.7M22 9a15 15 0 0 0-8.8-3.5"/><path d="M12 20h.01"/></svg>Works without internet</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20.8 11.6 12.4 20a2 2 0 0 1-2.8 0L4 14.4a2 2 0 0 1 0-2.8L12.4 3.2A2 2 0 0 1 13.8 2.6H19a2 2 0 0 1 2 2v5.6a2 2 0 0 1-.2 1.4Z"/><circle cx="16.5" cy="7.5" r="1.2"/></svg>Free for homes</li>
+        </ul>
       </div>
 
       <figure class="room" aria-label="Three devices on a home network sharing one Dilby">
@@ -283,24 +323,85 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
       </figure>
     </div>
 
-    <section id="how" aria-labelledby="how-t">
+    <section id="why" aria-labelledby="why-t">
       <div class="section-head">
-        <p class="eyebrow">How it works</p>
-        <h2 id="how-t">Running in an afternoon. Useful for years.</h2>
+        <p class="eyebrow">Why Dilby</p>
+        <h2 id="why-t">Cloud AI knows one person. Dilby knows your household.</h2>
       </div>
-      <ol class="steps">
-        <li><h3>Install it on one computer</h3><p>Run the Windows app, and Dilby sets up its model and engine for your graphics card. After that first download it needs no internet at all.</p></li>
-        <li><h3>Open it to your network</h3><p>Flip one switch and every phone, tablet and laptop on your Wi-Fi can use Dilby in a browser. You approve each person who joins.</p></li>
-        <li><h3>Dilby remembers together</h3><p>Facts one person teaches Dilby help everyone else, with the author credited. Health, money and anything personal stay with the person who said it.</p></li>
-      </ol>
+      <div class="compare">
+        <div class="col them">
+          <h3>Cloud assistants</h3>
+          <ul>
+            <li>Each person is on their own; nothing one of you tells it helps anyone else</li>
+            <li>Your conversations live on a company's servers</li>
+            <li>Paid plans are priced per person</li>
+            <li>Nothing works when the internet is down</li>
+          </ul>
+        </div>
+        <div class="col us">
+          <h3>Dilby</h3>
+          <ul>
+            <li>One memory the whole household shares, with credit to whoever taught it</li>
+            <li>Everything stays on a computer you own</li>
+            <li>One install for everyone, free for homes</li>
+            <li>Keeps working with the internet unplugged</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="day" aria-labelledby="day-t">
+      <div class="section-head">
+        <p class="eyebrow">A day with Dilby</p>
+        <h2 id="day-t">One assistant, everyone's day.</h2>
+        <p class="lede">Examples of how a household uses it, from breakfast to bedtime.</p>
+      </div>
+      <div class="scenes">
+        <article class="scene">
+          <p class="when"><time>7:40</time> Mia, on the family tablet</p>
+          <p class="ask">Why is the sky blue? Explain it like I'm ten.</p>
+          <p class="reply">Sunlight is every colour mixed together. Blue light bounces around the air the most, so blue is what reaches your eyes from every direction.</p>
+          <span class="tag">Homework help</span>
+        </article>
+        <article class="scene">
+          <p class="when"><time>12:15</time> Alex, on a lunch break</p>
+          <p class="ask">When is the car going in for its service?</p>
+          <p class="reply">Thursday morning <span class="from">(from Sam)</span>. Sam mentioned it on Monday.</p>
+          <span class="tag hl">Shared memory</span>
+        </article>
+        <article class="scene">
+          <p class="when"><time>18:10</time> Mia, getting ready for bed</p>
+          <p class="ask">Is it recycling week?</p>
+          <p class="reply">Yes, it goes out tonight. It's every other Tuesday <span class="from">(from Jordan)</span>.</p>
+          <span class="tag hl">Shared memory</span>
+        </article>
+        <article class="scene">
+          <p class="when"><time>19:50</time> Jordan, in a private chat</p>
+          <p class="ask">How do I bring up something awkward with my manager?</p>
+          <p class="reply">Pick a quiet moment, lead with what you want to fix rather than who's at fault, and suggest one concrete next step.</p>
+          <span class="tag lock">Private: never remembered or shared</span>
+        </article>
+        <article class="scene">
+          <p class="when"><time>21:05</time> Sam, at the family PC</p>
+          <p class="ask">Draft a friendly note to the neighbours about Saturday's party.</p>
+          <p class="reply">Hi! We're having a few friends over this Saturday from 7. We'll keep the music down after 10, and you're very welcome to join us.</p>
+          <span class="tag">Writing</span>
+        </article>
+        <article class="scene code">
+          <p class="when"><time>23:20</time> Alex, in the terminal</p>
+          <p class="ask"><code>node dilby.ts</code> › add tests for the date parser</p>
+          <p class="reply">Added six tests to <code>parser.test.ts</code> and ran them. All pass.</p>
+          <span class="tag">Coding agent</span>
+        </article>
+      </div>
     </section>
 
     <section id="shared" aria-labelledby="shared-t">
       <div class="shared">
         <div class="section-head" style="margin:0">
           <p class="eyebrow">Shared memory</p>
-          <h2 id="shared-t">Local AI tools treat everyone as alone. Dilby treats your network as a household.</h2>
-          <p class="lede">Ollama, LM Studio and Open WebUI give each person their own island. Dilby keeps one memory for the group, and every fact records who taught it.</p>
+          <h2 id="shared-t">It remembers together, and it knows what not to share.</h2>
+          <p class="lede">Tell Dilby something once and the whole household benefits, with credit to whoever said it. What's personal stays with the person who said it.</p>
           <div class="flow" aria-label="How a fact moves from Sam to Alex">
             <div class="person"><span class="avatar">S</span><p class="bubble">Heads up, I've gone vegetarian. And we're nearly out of olive oil.</p></div>
             <p class="fact"><span aria-hidden="true">↳</span><span>Dilby learned 2 facts · shared · <b>author: Sam</b></span></p>
@@ -317,34 +418,17 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
       </div>
     </section>
 
-    <section id="who" aria-labelledby="who-t">
+    <section id="how" aria-labelledby="how-t">
       <div class="section-head">
-        <p class="eyebrow">Who it's for</p>
-        <h2 id="who-t">Built for a kitchen table. Ready for a locked-down lab.</h2>
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-t">Up and running in an afternoon.</h2>
       </div>
-      <div class="two">
-        <div class="panel">
-          <h3>Homes and communities</h3>
-          <p class="muted">Families, flatmates, clubs and small groups who want a capable assistant without handing their lives to a cloud service.</p>
-          <ul>
-            <li>A ChatGPT-style app on every device in the house</li>
-            <li>Fast answers, or Smart mode when it should think first</li>
-            <li>OpenAI-, Anthropic- and MCP-compatible APIs for your own apps</li>
-          </ul>
-        </div>
-        <div class="panel">
-          <h3>Organizations and air-gapped sites</h3>
-          <p class="muted">Labs, clinics, schools, field teams and contractors whose data cannot leave the building, or where there is no internet to leave by.</p>
-          <ul>
-            <li>Runs with zero internet once installed</li>
-            <li>Every fact and request is attributed to a person</li>
-            <li>Admin panel with health checks, usage and audit log</li>
-            <li>Team permissions, SSO and multi-GPU <span class="badge soon">Planned</span></li>
-          </ul>
-        </div>
-      </div>
+      <ol class="steps">
+        <li><h3>Install it on one computer</h3><p>Run the Windows app on a PC with a capable graphics card. Dilby downloads its model and engine once; after that it needs no internet at all.</p></li>
+        <li><h3>Invite your household</h3><p>Flip one switch and every phone, tablet and laptop on your Wi-Fi can use Dilby in a browser. You approve each person who joins.</p></li>
+        <li><h3>Let it learn together</h3><p>Everyday facts one person mentions help everyone else, credited to whoever said them. Health, money and anything personal stay with their author.</p></li>
+      </ol>
     </section>
-
 
     <section id="anywhere" aria-labelledby="anywhere-t">
       <div class="section-head">
@@ -388,35 +472,6 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
       </div>
     </section>
 
-    <section id="plans" aria-labelledby="plans-t">
-      <div class="section-head">
-        <p class="eyebrow">Plans</p>
-        <h2 id="plans-t">Nothing a household needs is behind a paywall.</h2>
-        <p class="lede">Organization pricing isn't set yet. Tell us what you need in the form below.</p>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th scope="col" style="width:44%"><span class="eyebrow">Feature</span></th><th scope="col">Home &amp; community<small>Free</small></th><th scope="col">Organization<small>Pricing to come</small></th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Windows app, local model and engine</td><td class="y">Included</td><td class="y">Included</td></tr>
-            <tr><td>Web app on every device on your network</td><td class="y">Included</td><td class="y">Included</td></tr>
-            <tr><td>Shared memory with authorship</td><td class="y">Included</td><td class="y">Included</td></tr>
-            <tr><td>CLI coding agent and APIs</td><td class="y">Included</td><td class="y">Included</td></tr>
-            <tr><td>Admin panel, health checks, audit log</td><td class="y">Included</td><td class="y">Included</td></tr>
-            <tr><td>Teams with permissions on shared memory</td><td class="n">No</td><td>Planned</td></tr>
-            <tr><td>Company sign-in (SSO)</td><td class="n">No</td><td>Planned</td></tr>
-            <tr><td>Data retention and deletion rules</td><td class="n">No</td><td>Planned</td></tr>
-            <tr><td>Several machines and GPUs</td><td class="n">No</td><td>Planned</td></tr>
-            <tr><td>Offline install and update bundles</td><td class="n">No</td><td>Planned</td></tr>
-            <tr><td>Privacy layer for cloud models (only cleaned requests leave)</td><td class="n">No</td><td>Exploring</td></tr>
-            <tr><td>Support</td><td>Community</td><td>Planned</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
     <section id="privacy" aria-labelledby="privacy-t">
       <div class="section-head">
         <p class="eyebrow">Privacy</p>
@@ -426,6 +481,37 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
         <div><h3>It runs on your hardware</h3><p>The model runs on your own graphics card. No account with us, no cloud inference, no telemetry.</p><p class="spec">llama.cpp · open-weight model</p></div>
         <div><h3>Locked down, or open by choice</h3><p>Once it's set up, lock Dilby down completely: it answers from its own knowledge and your documents. Or allow internet access for the server, and each chat still asks before it goes online.</p><p class="spec">per-server switch · per-request permission</p></div>
         <div><h3>You decide who's in</h3><p>The host approves every account, chooses whether Dilby is open to this computer, the home network, or the internet, and can see and revoke every key.</p><p class="spec">host-approved accounts · 2FA</p></div>
+      </div>
+    </section>
+
+    <section id="orgs" aria-labelledby="orgs-t">
+      <div class="section-head">
+        <p class="eyebrow">For organizations</p>
+        <h2 id="orgs-t">Private AI for places the cloud can't go.</h2>
+        <p class="lede">Labs, clinics, schools, field teams and contractors whose data can't leave the building, or where there's no internet to leave by. Dilby is free for homes and communities; organization pricing isn't set yet, so tell us what you need.</p>
+      </div>
+      <div class="two">
+        <div class="panel">
+          <h3>Available today</h3>
+          <ul>
+            <li>Runs with zero internet once installed</li>
+            <li>Every learned fact and every request is attributed to a person</li>
+            <li>Admin panel with health checks, usage, energy and an audit log</li>
+            <li>Host-approved accounts, two-factor sign-in and revocable keys</li>
+            <li>OpenAI- and Anthropic-compatible APIs and an MCP server</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>On the roadmap</h3>
+          <ul class="road">
+            <li>Teams with permissions on shared memory <span class="badge soon">Planned</span></li>
+            <li>Company sign-in (SSO) <span class="badge soon">Planned</span></li>
+            <li>Data retention and deletion rules <span class="badge soon">Planned</span></li>
+            <li>Several machines and GPUs <span class="badge soon">Planned</span></li>
+            <li>Offline install and update bundles <span class="badge soon">Planned</span></li>
+            <li>Privacy layer that sends only cleaned requests to cloud models <span class="badge">Exploring</span></li>
+          </ul>
+        </div>
       </div>
     </section>
 
