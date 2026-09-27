@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges" role="img" aria-label="Eli">
+  <!-- 16px pixel master: every edge on the pixel grid, no gradients.
+       The same stepped tile, a 2px ring, a 2px ember with a hot core, and the
+       open seat ending in a two-step stair. -->
+  <path fill="#211813" d="M2 0h12v1h-12zM1 1h14v1h-14zM0 2h16v1h-16zM0 3h16v1h-16zM0 4h16v1h-16zM0 5h16v1h-16zM0 6h16v1h-16zM0 7h16v1h-16zM0 8h16v1h-16zM0 9h16v1h-16zM0 10h16v1h-16zM0 11h16v1h-16zM0 12h16v1h-16zM0 13h16v1h-16zM1 14h14v1h-14zM2 15h12v1h-12z"/>
+  <path fill="#fbeedc" d="M5 2h6v1h-6zM4 3h8v1h-8zM3 4h3v1h-3zM10 4h3v1h-3zM2 5h3v1h-3zM11 5h3v1h-3zM2 6h2v1h-2zM12 6h2v1h-2zM2 7h2v1h-2zM12 7h2v1h-2zM2 8h2v1h-2zM12 8h2v1h-2zM2 9h2v1h-2zM2 10h3v1h-3zM3 11h3v1h-3zM10 11h1v1h-1zM4 12h8v1h-8zM5 13h6v1h-6z"/>
+  <path fill="#f39036" d="M4 7h3v1h-3zM9 7h3v1h-3zM4 8h3v1h-3zM9 8h3v1h-3z"/>
+  <path fill="#ffc062" d="M7 7h2v1h-2zM7 8h2v1h-2z"/>
+</svg>

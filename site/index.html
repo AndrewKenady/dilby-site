@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Eli: one private AI for your whole home or team.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Eli Early Access</title>
+<style>
+:root {
+  --bg: #f8f7f4;
+  --bg-2: #f0ede6;
+  --surface: #ffffff;
+  --text: #1b1916;
+  --text-2: #57514a;
+  --text-3: #837b71;
+  --line: #e4dfd6;
+  --accent: #c8620f;
+  --accent-soft: #fbe9d6;
+  --accent-ink: #fff8ee;
+  --ember-a: #ec7a2c;
+  --ember-b: #ffc466;
+  --glow: rgba(240, 120, 44, .10);
+  --ok: #3f7d4e;
+  --font-sans: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Iowan Old Style", "Sitka Display", "Sitka Heading", Charter, "Bitstream Charter", Georgia, serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  --measure: 62ch;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #15110e;
+    --bg-2: #1b1612;
+    --surface: #1e1814;
+    --text: #f5ede3;
+    --text-2: #c9bcad;
+    --text-3: #978a7b;
+    --line: #342a23;
+    --accent: #ffae48;
+    --accent-soft: #33241a;
+    --accent-ink: #1a110a;
+    --glow: rgba(255, 174, 72, .12);
+    --ok: #8fcf9c;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #15110e;
+  --bg-2: #1b1612;
+  --surface: #1e1814;
+  --text: #f5ede3;
+  --text-2: #c9bcad;
+  --text-3: #978a7b;
+  --line: #342a23;
+  --accent: #ffae48;
+  --accent-soft: #33241a;
+  --accent-ink: #1a110a;
+  --glow: rgba(255, 174, 72, .12);
+  --ok: #8fcf9c;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font: 16px/1.6 var(--font-sans); padding-inline: 20px; }
+.wrap { max-width: 1080px; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.12; text-wrap: balance; margin: 0; letter-spacing: -.01em; }
+h1 { font-size: clamp(2.3rem, 5.6vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
+h3 { font-size: 1.2rem; }
+p { margin: 0; }
+a { color: var(--accent); }
+.eyebrow { font: 600 .74rem/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.lede { color: var(--text-2); font-size: 1.15rem; max-width: var(--measure); }
+.muted { color: var(--text-2); }
+section { padding-block: clamp(56px, 8vw, 96px); border-top: 1px solid var(--line); }
+.section-head { display: grid; gap: 14px; margin-bottom: 40px; max-width: 720px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; font: 600 .7rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; padding: 5px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--text-3); white-space: nowrap; }
+.badge.soon { border-color: var(--accent); color: var(--accent); }
+
+/* Top bar */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 600 1.3rem/1 var(--font-display); color: var(--text); text-decoration: none; }
+.brand svg { width: 34px; height: 34px; }
+.top nav { display: flex; gap: 22px; align-items: center; font-size: .92rem; }
+.top nav a { color: var(--text-2); text-decoration: none; }
+.top nav a:hover { color: var(--text); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 600 1rem/1 var(--font-sans); padding: 14px 20px; border-radius: 10px; border: 1px solid transparent; text-decoration: none; cursor: pointer; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { filter: brightness(1.06); }
+.btn-ghost { border-color: var(--line); color: var(--text); background: transparent; }
+.btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.top .btn { padding: 10px 14px; font-size: .9rem; }
+@media (max-width: 720px) { .top nav a:not(.btn) { display: none; } }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding-block: 40px 80px; }
+.hero-copy { display: grid; gap: 22px; }
+.prompt { font: .85rem/1.4 var(--font-mono); color: var(--text-3); }
+.prompt b { color: var(--accent); font-weight: 600; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.fine { font-size: .85rem; color: var(--text-3); }
+@media (max-width: 880px) { .hero { grid-template-columns: 1fr; padding-block: 24px 56px; } }
+
+/* The room: devices around one hearth */
+.room { position: relative; background: radial-gradient(60% 60% at 50% 50%, var(--glow), transparent 70%), var(--bg-2); border: 1px solid var(--line); border-radius: 20px; padding: 22px; display: grid; gap: 16px; }
+.room svg.map { width: 100%; height: auto; display: block; }
+.map text { font: 600 11px var(--font-mono); fill: var(--text-2); }
+.map .wire { stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 3 5; fill: none; }
+.map .pulse { stroke: var(--accent); stroke-width: 2; fill: none; stroke-dasharray: 6 200; animation: flow 3.2s linear infinite; }
+.map .dev { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.map .dev-ink { stroke: var(--text-2); stroke-width: 1.5; fill: none; }
+@keyframes flow { from { stroke-dashoffset: 206; } to { stroke-dashoffset: 0; } }
+.chat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 10px; font-size: .92rem; }
+.chat .who { font: 600 .72rem/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
+.chat .you { justify-self: end; background: var(--accent-soft); padding: 8px 12px; border-radius: 12px 12px 4px 12px; max-width: 85%; }
+.chat .eli { max-width: 92%; }
+.from { font: 600 .78rem var(--font-mono); color: var(--accent); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .map .pulse { animation: none; stroke-dasharray: none; opacity: .5; } }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: step; list-style: none; padding: 0; margin: 0; }
+.steps li { display: grid; gap: 10px; align-content: start; padding-top: 18px; border-top: 2px solid var(--text); }
+.steps li::before { counter-increment: step; content: counter(step, decimal-leading-zero); font: 600 .8rem/1 var(--font-mono); color: var(--accent); }
+.steps p { color: var(--text-2); }
+@media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+
+/* Shared context */
+.shared { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.flow { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 14px; }
+.person { display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font: 700 .85rem var(--font-sans); color: var(--accent-ink); background: var(--accent); }
+.avatar.b { background: var(--text-2); color: var(--bg); }
+.bubble { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: .92rem; }
+.fact { display: flex; align-items: center; gap: 10px; margin-left: 48px; padding: 8px 12px; border: 1px dashed var(--accent); border-radius: 10px; font: .82rem/1.4 var(--font-mono); color: var(--text-2); }
+.fact b { color: var(--accent); font-weight: 600; }
+.rules { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.rules li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; }
+.rules svg { width: 20px; height: 20px; color: var(--accent); margin-top: 3px; }
+.rules b { display: block; }
+.rules span { color: var(--text-2); }
+@media (max-width: 860px) { .shared { grid-template-columns: 1fr; } }
+
+/* Audiences and tiers */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: grid; gap: 14px; align-content: start; }
+.panel ul { margin: 0; padding-left: 1.1em; color: var(--text-2); display: grid; gap: 6px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; min-width: 560px; font-size: .95rem; }
+th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; }
+thead th small { display: block; font: .8rem var(--font-sans); color: var(--text-3); font-weight: 400; margin-top: 4px; }
+tbody tr:last-child td { border-bottom: 0; }
+td.y { color: var(--ok); font-weight: 600; }
+td.n { color: var(--text-3); }
+
+/* Privacy */
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pillars div { display: grid; gap: 8px; align-content: start; }
+.pillars p { color: var(--text-2); }
+.spec { font: .85rem/1.5 var(--font-mono); color: var(--text-3); }
+@media (max-width: 760px) { .pillars { grid-template-columns: 1fr; } }
+
+/* Form */
+.signup { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; }
+form { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: grid; gap: 16px; }
+.field { display: grid; gap: 6px; }
+.field label, fieldset legend { font-weight: 600; font-size: .92rem; }
+input, select, textarea { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; width: 100%; }
+textarea { resize: vertical; min-height: 84px; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice { position: relative; }
+.choice input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.choice span { display: inline-block; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: .92rem; }
+.choice input:checked + span { border-color: var(--accent); background: var(--accent-soft); color: var(--text); font-weight: 600; }
+.choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.err { color: #c0392b; font-size: .85rem; }
+.done { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--accent); border-radius: 18px; padding: 26px; }
+@media (max-width: 860px) { .signup { grid-template-columns: 1fr; } .row2 { grid-template-columns: 1fr; } }
+
+/* FAQ */
+.faq { display: grid; gap: 0; max-width: 780px; }
+details { border-bottom: 1px solid var(--line); padding-block: 18px; }
+summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::after { content: "+"; font-family: var(--font-mono); color: var(--accent); }
+details[open] summary::after { content: "–"; }
+details p { color: var(--text-2); margin-top: 10px; max-width: var(--measure); }
+footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--text-3); font-size: .88rem; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Eli home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="t1" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2e221b"/><stop offset="1" stop-color="#140e0b"/></linearGradient><radialGradient id="g1" cx="32" cy="33" r="26" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffae48" stop-opacity=".5"/><stop offset=".42" stop-color="#f0782c" stop-opacity=".16"/><stop offset="1" stop-color="#f0782c" stop-opacity="0"/></radialGradient><linearGradient id="e1" x1="16" y1="0" x2="48" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec7a2c"/><stop offset=".55" stop-color="#ffc466"/><stop offset="1" stop-color="#f38f30"/></linearGradient><linearGradient id="r1" x1="0" y1="12" x2="0" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff8ee"/><stop offset="1" stop-color="#f5dcbf"/></linearGradient><mask id="s1" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64"><rect width="64" height="64" fill="#fff"/><path d="M35.15 35.75H64V64H58.85Z" fill="#000"/></mask></defs><path d="M8 0H56V4H60V8H64V56H60V60H56V64H8V60H4V56H0V8H4V4H8Z" fill="url(#t1)"/><path d="M8 0H56V4H60V8H64V56H60V60H56V64H8V60H4V56H0V8H4V4H8Z" fill="url(#g1)"/><rect x="16" y="28.25" width="32" height="7.5" fill="url(#e1)"/><circle cx="32" cy="32" r="16" fill="none" stroke="url(#r1)" stroke-width="7.5" mask="url(#s1)"/></svg>
+      Eli
+    </a>
+    <nav aria-label="Page sections">
+      <a href="#how">How it works</a>
+      <a href="#shared">Shared memory</a>
+      <a href="#plans">Plans</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#access">Request early access</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="prompt"><b>eli&gt;</b> everyone's localized intelligence</p>
+        <h1>One private AI for your whole home or team.</h1>
+        <p class="lede">Eli runs on a computer you own and answers everyone on your network. It remembers together, keeps personal things personal, and works with the internet unplugged.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#access">Request early access</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <p class="fine">Free for homes and communities of up to 10 people.</p>
+      </div>
+
+      <figure class="room" aria-label="Three devices on a home network sharing one Eli">
+        <svg class="map" viewBox="0 0 440 210" role="img" aria-labelledby="map-t">
+          <title id="map-t">A laptop, a phone and a desktop connect to one Eli on the home network</title>
+          <path class="wire" d="M92 58 C150 58 170 105 220 105"/>
+          <path class="wire" d="M92 160 C150 160 170 105 220 105"/>
+          <path class="wire" d="M348 105 L262 105"/>
+          <path class="pulse" d="M92 58 C150 58 170 105 220 105"/>
+          <path class="pulse" d="M348 105 L262 105" style="animation-delay:-1.4s"/>
+          <path class="pulse" d="M92 160 C150 160 170 105 220 105" style="animation-delay:-2.3s"/>
+          <!-- laptop -->
+          <rect class="dev" x="36" y="34" width="56" height="36" rx="4"/><path class="dev-ink" d="M28 74h72"/>
+          <text x="64" y="94" text-anchor="middle">Sam's laptop</text>
+          <!-- phone -->
+          <rect class="dev" x="52" y="134" width="26" height="46" rx="5"/><path class="dev-ink" d="M61 174h8"/>
+          <text x="65" y="198" text-anchor="middle">Alex's phone</text>
+          <!-- desktop -->
+          <rect class="dev" x="348" y="82" width="62" height="40" rx="4"/><path class="dev-ink" d="M379 122v10M366 134h26"/>
+          <text x="379" y="154" text-anchor="middle">Family PC</text>
+          <!-- the hearth -->
+          <g transform="translate(213 78)">
+            <path d="M8 0H48V4H52V8H56V48H52V52H48V56H8V52H4V48H0V8H4V4H8Z" fill="#1e1612"/>
+            <rect x="14" y="24.7" width="28" height="6.6" fill="url(#e1)"/>
+            <circle cx="28" cy="28" r="14" fill="none" stroke="#fff3e2" stroke-width="6.6" mask="url(#s2)"/>
+            <mask id="s2" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56"><rect width="56" height="56" fill="#fff"/><path d="M30.75 31.3H56V56H51.5Z" fill="#000"/></mask>
+          </g>
+          <text x="241" y="156" text-anchor="middle">Eli · one GPU</text>
+        </svg>
+        <div class="chat" aria-label="Example conversation">
+          <span class="who">Alex, on the phone</span>
+          <p class="you">Can I bring peanut cookies to Sunday dinner?</p>
+          <p class="eli">Better not: Sam is allergic to peanuts <span class="from">(from Sam)</span>. The oat ones from last week would be safe.</p>
+        </div>
+      </figure>
+    </div>
+
+    <section id="how" aria-labelledby="how-t">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-t">Running in an afternoon. Useful for years.</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Install it on one computer</h3><p>Run the Windows app, and Eli sets up its model and engine for your graphics card. After that first download it needs no internet at all.</p></li>
+        <li><h3>Open it to your network</h3><p>Flip one switch and every phone, tablet and laptop on your Wi-Fi can use Eli in a browser. You approve each person who joins.</p></li>
+        <li><h3>Eli remembers together</h3><p>Facts one person teaches Eli help everyone else, with the author credited. Health, money and anything personal stay with the person who said it.</p></li>
+      </ol>
+    </section>
+
+    <section id="shared" aria-labelledby="shared-t">
+      <div class="shared">
+        <div class="section-head" style="margin:0">
+          <p class="eyebrow">Shared memory</p>
+          <h2 id="shared-t">Local AI tools treat everyone as alone. Eli treats your network as a household.</h2>
+          <p class="lede">Ollama, LM Studio and Open WebUI give each person their own island. Eli keeps one memory for the group, and every fact records who taught it.</p>
+          <div class="flow" aria-label="How a fact moves from Sam to Alex">
+            <div class="person"><span class="avatar">S</span><p class="bubble">Heads up, I'm allergic to peanuts. Also the Wi-Fi password is on the card in the kitchen drawer.</p></div>
+            <p class="fact"><span aria-hidden="true">↳</span><span>Eli learned 2 facts · shared · <b>author: Sam</b></span></p>
+            <div class="person"><span class="avatar b">A</span><p class="bubble">Where's the Wi-Fi password? <span class="muted">→</span> "On the card in the kitchen drawer <span class="from">(from Sam)</span>."</p></div>
+          </div>
+        </div>
+        <ul class="rules">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.2-7 10-4-1.8-7-5.6-7-10V6z"/></svg><div><b>Facts, never transcripts</b><span>Eli shares short things it learned ("Sam is allergic to peanuts"), not your conversations.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><div><b>Sensitive topics stay private</b><span>Health, money, relationships and anything about another person are kept for their author only.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg><div><b>Every fact has an author</b><span>Each person has their own token, so everything Eli learns is signed. Forget a fact and it disappears everywhere at once.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><div><b>You can see what's shared</b><span>A Memory page lists what Eli knows from you, with one-tap make-private and forget. Replies credit others inline, like "(from Sam)".</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.6 7 10 7a9.6 9.6 0 0 0 5.4-1.6"/></svg><div><b>Private chats in one tap</b><span>A private conversation neither learns nor uses shared memory. Sharing can also be switched off per person, or for the whole hub.</span></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" aria-labelledby="who-t">
+      <div class="section-head">
+        <p class="eyebrow">Who it's for</p>
+        <h2 id="who-t">Built for a kitchen table. Ready for a locked-down lab.</h2>
+      </div>
+      <div class="two">
+        <div class="panel">
+          <h3>Homes and communities</h3>
+          <p class="muted">Families, flatmates, clubs and small groups who want a capable assistant without handing their lives to a cloud service.</p>
+          <ul>
+            <li>A ChatGPT-style app on every device in the house</li>
+            <li>Fast answers, or Smart mode when it should think first</li>
+            <li>Command-line coding agent for the tinkerers</li>
+            <li>OpenAI-, Anthropic- and MCP-compatible APIs for your own apps</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Organizations and air-gapped sites</h3>
+          <p class="muted">Labs, clinics, schools, field teams and contractors whose data cannot leave the building, or where there is no internet to leave by.</p>
+          <ul>
+            <li>Runs with zero internet once installed</li>
+            <li>Every fact and request is attributed to a person</li>
+            <li>Admin panel with health checks, usage and audit log</li>
+            <li>Team permissions, SSO and multi-GPU <span class="badge soon">Planned</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans" aria-labelledby="plans-t">
+      <div class="section-head">
+        <p class="eyebrow">Plans</p>
+        <h2 id="plans-t">Nothing a household needs is behind a paywall.</h2>
+        <p class="lede">Organization pricing isn't set yet. Tell us what you need in the form below.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col" style="width:44%"><span class="eyebrow">Feature</span></th><th scope="col">Home &amp; community<small>Free · up to 10 people</small></th><th scope="col">Organization<small>Pricing to come</small></th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Windows app, local model and engine</td><td class="y">Included</td><td class="y">Included</td></tr>
+            <tr><td>Web app on every device on your network</td><td class="y">Included</td><td class="y">Included</td></tr>
+            <tr><td>Shared memory with authorship</td><td class="y">Included</td><td class="y">Included</td></tr>
+            <tr><td>CLI coding agent and APIs</td><td class="y">Included</td><td class="y">Included</td></tr>
+            <tr><td>Admin panel, health checks, audit log</td><td class="y">Included</td><td class="y">Included</td></tr>
+            <tr><td>More than 10 people</td><td class="n">No</td><td>Planned</td></tr>
+            <tr><td>Teams with permissions on shared memory</td><td class="n">No</td><td>Planned</td></tr>
+            <tr><td>Company sign-in (SSO)</td><td class="n">No</td><td>Planned</td></tr>
+            <tr><td>Data retention and deletion rules</td><td class="n">No</td><td>Planned</td></tr>
+            <tr><td>Several machines and GPUs</td><td class="n">No</td><td>Planned</td></tr>
+            <tr><td>Offline install and update bundles</td><td class="n">No</td><td>Planned</td></tr>
+            <tr><td>Privacy layer for cloud models (only cleaned requests leave)</td><td class="n">No</td><td>Exploring</td></tr>
+            <tr><td>Support</td><td>Community</td><td>Planned</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="privacy" aria-labelledby="privacy-t">
+      <div class="section-head">
+        <p class="eyebrow">Privacy</p>
+        <h2 id="privacy-t">Your data stays in the room.</h2>
+      </div>
+      <div class="pillars">
+        <div><h3>It runs on your hardware</h3><p>The model runs on your own graphics card. No account with us, no cloud inference, no telemetry.</p><p class="spec">llama.cpp · open-weight model</p></div>
+        <div><h3>Locked down, or open by choice</h3><p>Once it's set up, lock Eli down completely: it answers from its own knowledge and your documents. Or allow internet access for the server, and each chat still asks before it goes online.</p><p class="spec">per-server switch · per-request permission</p></div>
+        <div><h3>You decide who's in</h3><p>The host approves every account, chooses whether Eli is open to this computer, the home network, or the internet, and can see and revoke every key.</p><p class="spec">host-approved accounts · 2FA</p></div>
+      </div>
+    </section>
+
+    <section id="access" aria-labelledby="access-t">
+      <div class="signup">
+        <div class="section-head" style="margin:0">
+          <p class="eyebrow">Early access</p>
+          <h2 id="access-t">Get Eli early.</h2>
+          <p class="lede">We're letting people in a few at a time. Tell us a little about where Eli would live, and we'll be in touch.</p>
+          <p class="fine">Preview: this form isn't connected yet, so nothing is sent.</p>
+        </div>
+        <div>
+          <form id="form" novalidate>
+            <div class="row2">
+              <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
+              <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+            </div>
+            <fieldset>
+              <legend>Where would Eli live?</legend>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="kind" id="f-home" value="home" checked><span>Home or community</span></label>
+                <label class="choice"><input type="radio" name="kind" id="f-org" value="org"><span>Organization</span></label>
+              </div>
+            </fieldset>
+            <div class="row2" id="org-fields" hidden>
+              <div class="field"><label for="f-orgname">Organization name</label><input id="f-orgname" name="org" autocomplete="organization"></div>
+              <div class="field"><label for="f-size">Size</label>
+                <select id="f-size" name="size"><option value="">Choose…</option><option>1–10 people</option><option>11–50</option><option>51–250</option><option>251–1,000</option><option>More than 1,000</option></select>
+              </div>
+            </div>
+            <div class="field"><label for="f-use">What would you use it for?</label><textarea id="f-use" name="use" placeholder="e.g. a family assistant that knows our routines, or a coding helper for a lab with no internet"></textarea></div>
+            <fieldset>
+              <legend>Do you need fully offline or air-gapped use?</legend>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="offline" id="f-off-y" value="yes"><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="offline" id="f-off-n" value="no" checked><span>No</span></label>
+              </div>
+            </fieldset>
+            <p class="err" id="err" role="alert" hidden></p>
+            <button class="btn btn-primary" type="submit">Request early access</button>
+          </form>
+          <div class="done" id="done" hidden tabindex="-1">
+            <p class="eyebrow">Request received</p>
+            <h3 id="done-t">Thanks, you're on the list.</h3>
+            <p class="muted">We'll email you when there's a spot. (Preview: nothing was actually sent.)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-t">
+      <div class="section-head"><p class="eyebrow">Questions</p><h2 id="faq-t">FAQ</h2></div>
+      <div class="faq">
+        <details open><summary>Does it need the internet?</summary><p>Only once, to download the model (about 23 GB) during setup. After that Eli runs with the network cable unplugged. Offline install bundles for air-gapped sites are planned.</p></details>
+        <details><summary>What hardware do I need?</summary><p>A Windows 10 or 11 PC with an NVIDIA graphics card with 12 GB of memory (AMD and Intel cards work through Vulkan, more slowly), 32 GB of RAM and about 25 GB of free disk. On a 12 GB laptop GPU it writes about 35 tokens (roughly 25 words) a second. Linux and macOS work from source.</p></details>
+        <details><summary>Is it free?</summary><p>Yes, for homes and communities of up to 10 people, with every feature a household uses. Organizations will pay for team controls, sign-in, scale and support; pricing isn't set yet.</p></details>
+        <details><summary>What gets shared between people?</summary><p>Short facts Eli learns, like where the spare key is or who is vegetarian, credited to whoever said them. Never whole chats, and never health, money, relationships or things about other people. You can see and forget everything Eli knows from you, and private chats share nothing.</p></details>
+        <details><summary>How is it different from Ollama or Open WebUI?</summary><p>Those are great tools for one person. Eli is built for a group: one install serves everyone on your network, the host approves who joins, and Eli keeps a shared memory with authorship instead of starting from zero for each person.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Eli · Everyone's Localized Intelligence</span>
+    <span>Made for homes, communities and teams that keep their data close.</span>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const form = document.getElementById('form');
+  const org = document.getElementById('org-fields');
+  const err = document.getElementById('err');
+  const sync = () => { org.hidden = !document.getElementById('f-org').checked; };
+  form.addEventListener('change', sync);
+  sync();
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const problems = [];
+    if (!name) problems.push('your name');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) problems.push('an email address we can reach');
+    if (!org.hidden && !form.org.value.trim()) problems.push('your organization name');
+    if (problems.length) {
+      err.textContent = `Please add ${problems.join(', ')}.`;
+      err.hidden = false;
+      return;
+    }
+    err.hidden = true;
+    form.hidden = true;
+    const done = document.getElementById('done');
+    document.getElementById('done-t').textContent = `Thanks, ${name.split(' ')[0]}. You're on the list.`;
+    done.hidden = false;
+    done.focus();
+  });
+})();
+</script>
+</body>
+</html>
